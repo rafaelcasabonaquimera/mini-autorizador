@@ -21,7 +21,7 @@ public class CartaoData {
     @Id
     private String id;
     private String numeroCartao;
-    private Integer senha;
+    private String senha;
     private BigDecimal saldo;
 
 }

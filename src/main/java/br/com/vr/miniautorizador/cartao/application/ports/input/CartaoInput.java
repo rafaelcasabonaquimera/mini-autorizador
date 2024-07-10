@@ -23,12 +23,9 @@ public class CartaoInput implements CartaoUseCase {
         return this.getByNumeroCartao(input.getNumeroCartao())
                 .map(Optional::of)
                 .defaultIfEmpty(Optional.empty())
-                .flatMap(optionalCartao -> {
-                    if (optionalCartao.isPresent()) {
-                        return Mono.error(new CartaoExistenteException("Cartão já existe", optionalCartao.get()));
-                    }
-                    return adapter.create(CartaoService.fromInput(input));
-                });
+                .flatMap(cartao -> cartao.isPresent()
+                        ? Mono.error(new CartaoExistenteException("Cartão já existe", cartao.get()))
+                        : adapter.create(CartaoService.fromInput(input)));
     }
 
     @Override

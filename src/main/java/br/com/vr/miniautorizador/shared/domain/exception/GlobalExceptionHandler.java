@@ -15,5 +15,16 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY)
                 .body(ex.getCartao());
     }
+    @ExceptionHandler(SaldoInsuficienteException.class)
+    protected ResponseEntity<String> handleSaldoInsulficiente(SaldoInsuficienteException ex) {
+        return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY)
+                .body(ex.getMessage());
+    }
+
+    @ExceptionHandler(ErroSenhaException.class)
+    protected ResponseEntity<String> handleErroSenha(ErroSenhaException ex) {
+        return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY)
+                .body(ex.getMessage());
+    }
 
 }

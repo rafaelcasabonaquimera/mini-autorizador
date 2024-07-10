@@ -15,6 +15,6 @@ public class InputCartao {
 
     private String numeroCartao;
 
-    private Integer senha;
+    private String senha;
 
 }

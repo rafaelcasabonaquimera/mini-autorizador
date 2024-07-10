@@ -33,4 +33,5 @@ public class CartaoAdapter implements CartaoOutput {
     public Mono<BigDecimal> getSaldo(final String numeroCartao) {
         return mapper.fromDataSaldo(repository.findFirstByNumeroCartao(numeroCartao));
     }
+
 }

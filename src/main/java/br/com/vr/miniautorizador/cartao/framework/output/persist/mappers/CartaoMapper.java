@@ -5,6 +5,8 @@ import br.com.vr.miniautorizador.cartao.framework.output.persist.data.CartaoData
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
 
+import java.math.BigDecimal;
+
 @Component
 public class CartaoMapper {
 
@@ -12,6 +14,7 @@ public class CartaoMapper {
         return CartaoData.builder()
                 .numeroCartao(entity.getNumeroCartao())
                 .senha(entity.getSenha())
+                .saldo(entity.getSaldo())
                 .build();
     }
 
@@ -20,6 +23,10 @@ public class CartaoMapper {
                 .numeroCartao(cartao.getNumeroCartao())
                 .senha(cartao.getSenha())
                 .build());
+    }
+
+    public Mono<BigDecimal> fromDataSaldo(final Mono<CartaoData> data) {
+        return data.map(cartao -> cartao.getSaldo());
     }
 
 }

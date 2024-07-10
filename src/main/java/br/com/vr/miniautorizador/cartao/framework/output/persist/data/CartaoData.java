@@ -8,6 +8,8 @@ import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.math.BigDecimal;
+
 @Document("cartoes")
 @NoArgsConstructor
 @AllArgsConstructor
@@ -20,5 +22,6 @@ public class CartaoData {
     private String id;
     private String numeroCartao;
     private Integer senha;
+    private BigDecimal saldo;
 
 }

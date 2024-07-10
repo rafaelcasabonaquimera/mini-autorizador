@@ -7,9 +7,10 @@ import br.com.vr.miniautorizador.cartao.domain.vo.InputCartao;
 import br.com.vr.miniautorizador.cartao.framework.output.CartaoAdapter;
 import br.com.vr.miniautorizador.shared.domain.exception.CartaoExistenteException;
 import lombok.AllArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
+
+import java.util.Optional;
 
 @Component
 @AllArgsConstructor
@@ -19,12 +20,18 @@ public class CartaoInput implements CartaoUseCase {
     @Override
     public Mono<Cartao> create(final InputCartao input) {
         return this.getByNumeroCartao(input.getNumeroCartao())
-                .switchIfEmpty(
-                        adapter.create(CartaoService.fromInput(input)));
+                .map(Optional::of)
+                .defaultIfEmpty(Optional.empty())
+                .flatMap(optionalCartao -> {
+                    if (optionalCartao.isPresent()) {
+                        return Mono.error(new CartaoExistenteException("Cartão já existe", optionalCartao.get()));
+                    }
+                    return adapter.create(CartaoService.fromInput(input));
+                });
     }
 
     @Override
-    public Mono<Cartao> getByNumeroCartao(String numeroCartao) {
+    public Mono<Cartao> getByNumeroCartao(final String numeroCartao) {
         return adapter.getByNumeroCartao(numeroCartao);
     }
 }

@@ -4,6 +4,8 @@ import br.com.vr.miniautorizador.cartao.domain.entity.Cartao;
 import br.com.vr.miniautorizador.cartao.domain.vo.InputCartao;
 import reactor.core.publisher.Mono;
 
+import java.math.BigDecimal;
+
 public interface CartaoUseCase {
 
     /**
@@ -14,5 +16,7 @@ public interface CartaoUseCase {
     Mono<Cartao> create(final InputCartao input);
 
     Mono<Cartao> getByNumeroCartao(final String numeroCartao);
+
+    Mono<BigDecimal> getSaldo(final String numeroCartao);
 
 }

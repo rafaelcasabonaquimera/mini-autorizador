@@ -8,6 +8,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
 
+import java.math.BigDecimal;
+
 @Component
 @AllArgsConstructor
 public class CartaoAdapter implements CartaoOutput {
@@ -25,5 +27,10 @@ public class CartaoAdapter implements CartaoOutput {
     @Override
     public Mono<Cartao> getByNumeroCartao(final String numeroCartao) {
         return mapper.fromData(repository.findFirstByNumeroCartao(numeroCartao));
+    }
+
+    @Override
+    public Mono<BigDecimal> getSaldo(final String numeroCartao) {
+        return mapper.fromDataSaldo(repository.findFirstByNumeroCartao(numeroCartao));
     }
 }

@@ -10,6 +10,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
 
+import java.math.BigDecimal;
 import java.util.Optional;
 
 @Component
@@ -33,5 +34,10 @@ public class CartaoInput implements CartaoUseCase {
     @Override
     public Mono<Cartao> getByNumeroCartao(final String numeroCartao) {
         return adapter.getByNumeroCartao(numeroCartao);
+    }
+
+    @Override
+    public Mono<BigDecimal> getSaldo(final String numeroCartao) {
+        return adapter.getSaldo(numeroCartao);
     }
 }

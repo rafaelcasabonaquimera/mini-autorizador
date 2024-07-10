@@ -1,4 +1,4 @@
-package br.com.vr.miniautorizador.cartao.domain.vo;
+package br.com.vr.miniautorizador.transacao.domain.vo;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -17,7 +17,7 @@ public class InputTransacao {
 
     private String numeroCartao;
 
-    private Integer senhaCartao;
+    private String senhaCartao;
 
     private BigDecimal valor;
 

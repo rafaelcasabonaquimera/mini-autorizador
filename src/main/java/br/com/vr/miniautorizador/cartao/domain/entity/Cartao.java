@@ -12,7 +12,7 @@ public class Cartao {
 
     private String numeroCartao;
 
-    private Integer senha;
+    private String senha;
 
     @JsonIgnore
     private BigDecimal saldo;

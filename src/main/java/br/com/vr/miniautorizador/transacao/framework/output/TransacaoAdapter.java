@@ -20,7 +20,7 @@ public class TransacaoAdapter implements TransacaoOutput {
 
     private TransacaoMapper transacaoMapper;
     @Override
-    @Transactional
+//    @Transactional
     public Mono<Transacao> atualizaSaldo(final Transacao entity) {
         return transacaoMapper.fromData(repository.findFirstByNumeroCartao(entity.getNumeroCartao())
                 .flatMap(optional ->
@@ -37,4 +37,5 @@ public class TransacaoAdapter implements TransacaoOutput {
                 }));
 
     }
+
 }
